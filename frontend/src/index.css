@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Light Mode (Lichess style) */
+    --bg-page: #edebe9;
+    --bg-card: #ffffff;
+    --bg-alt: #f1f1f1;
+    --bg-active: #dfdfdf;
+
+    --primary-green: #629924;
+    --primary-green-hover: #82b34a;
+
+    --text-main: #333333;
+    --text-bright: #000000;
+    --text-dim: #666666;
+
+    --border-main: #d1d1d1;
+    --border-dim: #e1e1e1;
+
+    --accent-blue: #3692e7;
+
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.2s ease, color 0.1s ease;
+  }
+
+  /* Dark Mode (Night Mode) */
+  .dark {
+    --bg-page: #161512;
+    --bg-card: #262421;
+    --bg-alt: #1a1917;
+    --bg-active: #3c3a37;
+
+    --text-main: #bababa;
+    --text-bright: #ffffff;
+    --text-dim: #999999;
+
+    --border-main: #403d39;
+    --border-dim: #2d2b28;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-main);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: background 0.2s ease, border-color 0.1s ease;
+  }
+
+  .dark .glass-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .chess-button {
+    @apply px-4 py-2 rounded font-bold transition-all duration-150 flex items-center justify-center gap-2;
+  }
+
+  .chess-button-primary {
+    @apply bg-[#629924] text-white hover:bg-[#82b34a] shadow-sm active:translate-y-[1px];
+  }
+
+  .chess-button-secondary {
+    background: var(--bg-active);
+    color: var(--text-main);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    @apply hover:opacity-90;
+  }
+
+  .chess-button-ghost {
+    color: var(--text-dim);
+    @apply hover:bg-black/5 hover:text-inherit;
+  }
+
+  .dark .chess-button-ghost {
+    @apply hover:bg-white/5;
+  }
+
+  .lobby-table th {
+    @apply text-left p-3 text-xs font-bold uppercase text-gray-500;
+    border-bottom: 1px solid var(--border-main);
+  }
+
+  .lobby-table td {
+    @apply p-3 text-sm;
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  .nav-link {
+    @apply px-3 py-2 rounded text-sm font-medium transition-colors cursor-pointer text-inherit;
+    @apply hover:bg-black/5;
+  }
+
+  .dark .nav-link {
+    @apply hover:bg-white/5;
+  }
+
+  /* Utility aliases for use in components */
+  .bg-theme-card {
+    background-color: var(--bg-card);
+  }
+
+  .bg-theme-alt {
+    background-color: var(--bg-alt);
+  }
+
+  .bg-theme-active {
+    background-color: var(--bg-active);
+  }
+
+  .border-theme {
+    border-color: var(--border-main);
+  }
+
+  .text-theme-main {
+    color: var(--text-main);
+  }
+
+  .text-theme-bright {
+    color: var(--text-bright);
+  }
+
+  .text-theme-dim {
+    color: var(--text-dim);
+  }
+}
+
+.lichess-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr 300px;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media (max-width: 1200px) {
+  .lichess-grid {
+    grid-template-columns: 1fr 300px;
+  }
+
+  .sidebar-left {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .lichess-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-right {
+    display: none;
+  }
+}
